@@ -17,6 +17,7 @@ RUN bash .setup/opencode.sh
 
 ADD --chown=10000:10000 https://sh.rustup.rs .setup/rustup.sh
 RUN bash .setup/rustup.sh -y
+RUN .cargo/bin/rustup toolchain install nightly
 RUN .cargo/bin/rustup target add thumbv6m-none-eabi
 RUN .cargo/bin/rustup target add thumbv8m.main-none-eabihf
 
