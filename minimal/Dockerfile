@@ -8,6 +8,10 @@ RUN apt-get update \
     && apt-get autoremove --yes \
     && apt-get clean
 
+RUN useradd --shell=/usr/bin/bash --uid=10000 container
+USER container
+WORKDIR /home/container/
+
 ADD --chown=10000:10000 https://opencode.ai/install .setup/opencode.sh
 RUN bash .setup/opencode.sh
 
