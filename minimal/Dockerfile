@@ -15,4 +15,4 @@ WORKDIR /home/container/
 ADD --chown=10000:10000 https://opencode.ai/install .setup/opencode.sh
 RUN bash .setup/opencode.sh
 
-COPY .profile .profile
+COPY .bashrc .bashrc

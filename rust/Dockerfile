@@ -21,4 +21,4 @@ RUN .cargo/bin/rustup toolchain install nightly
 RUN .cargo/bin/rustup target add thumbv6m-none-eabi
 RUN .cargo/bin/rustup target add thumbv8m.main-none-eabihf
 
-COPY .profile .profile
+COPY .bashrc .bashrc
