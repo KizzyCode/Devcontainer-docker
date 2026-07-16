@@ -18,11 +18,10 @@ fi
 mkdir -p "$AGENTMOUNTROOT/shared"
 exec container run \
     --interactive --tty --init --remove --rosetta \
-    --volume "/opt/homebrew/etc/ca-certificates/cert.pem:/home/container/.config/ca.pem:ro" \
-    --volume "$AGENTMOUNTROOT/config.toml:/home/container/.config/config.toml:ro" \
+    --volume "/opt/homebrew/etc/ca-certificates/cert.pem:/etc/ssl/certs/custom-codex-ca-certificate.pem:ro" \
     --volume "$AGENTMOUNTROOT/shared:/home/container/shared:rw" \
-    --env "CODEX_CA_CERTIFICATE=/home/container/.config/ca.pem" \
-    --env "CODEX_HOME=/home/container/.config" \
+    --volume "$AGENTMOUNTROOT/codex:/home/container/.codex:rw" \
+    --env "CODEX_CA_CERTIFICATE=/etc/ssl/certs/custom-codex-ca-certificate.pem" \
     --entrypoint /bin/bash \
     --workdir /home/container/shared \
     --cap-drop ALL \

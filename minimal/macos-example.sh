@@ -18,11 +18,10 @@ fi
 mkdir -p "$AGENTMOUNTROOT/shared"
 exec container run \
     --interactive --tty --init --remove --rosetta \
-    --volume "/opt/homebrew/etc/ca-certificates/cert.pem:/home/container/.config/ca.pem:ro" \
-    --volume "$AGENTMOUNTROOT/opencode.json:/home/container/.config/opencode.json:ro" \
+    --volume "/opt/homebrew/etc/ca-certificates/cert.pem:/etc/ssl/certs/custom-codex-ca-certificate.pem:ro" \
     --volume "$AGENTMOUNTROOT/shared:/home/container/shared:rw" \
-    --env "OPENCODE_CONFIG=/home/container/.config/opencode.json" \
-    --env "NODE_EXTRA_CA_CERTS=/home/container/.config/ca.pem" \
+    --volume "$AGENTMOUNTROOT/codex:/home/container/.codex:rw" \
+    --env "CODEX_CA_CERTIFICATE=/etc/ssl/certs/custom-codex-ca-certificate.pem" \
     --entrypoint /bin/bash \
     --workdir /home/container/shared \
     --cap-drop ALL \
