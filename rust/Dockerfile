@@ -18,7 +18,7 @@ RUN ln codex-`uname -m`-unknown-linux-musl codex
 
 FROM debian:stable-slim
 
-ENV APT_PACKAGES bubblewrap build-essential ca-certificates curl git lldb nano
+ENV APT_PACKAGES bubblewrap build-essential ca-certificates curl git lldb nano openssh-client
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
     && apt-get upgrade --yes \
