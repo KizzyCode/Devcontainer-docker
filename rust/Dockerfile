@@ -39,5 +39,7 @@ RUN .cargo/bin/rustup target add thumbv6m-none-eabi
 RUN .cargo/bin/rustup target add thumbv7em-none-eabihf
 RUN .cargo/bin/rustup target add thumbv8m.main-none-eabihf
 
+RUN .cargo/bin/cargo install flip-link
+
 RUN mkdir .config
 COPY .bashrc .bashrc
