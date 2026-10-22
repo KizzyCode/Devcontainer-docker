@@ -18,7 +18,7 @@ RUN ln codex-`uname -m`-unknown-linux-musl codex
 
 FROM debian:unstable-slim
 
-ENV APT_PACKAGES bubblewrap build-essential ca-certificates curl git kicad kicad-footprints kicad-symbols nano openjdk-25-jre-headless openssh-client python3 python3-pip python3-venv rsync
+ENV APT_PACKAGES bubblewrap build-essential ca-certificates curl git kicad kicad-footprints kicad-symbols nano default-jre-headless openssh-client python3 python3-pip python3-venv rsync
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
     && apt-get upgrade --yes \
