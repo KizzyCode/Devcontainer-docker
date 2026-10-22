@@ -4,3 +4,6 @@
 # Ignore example files
 example/*
 !example/.gitkeep
+
+# Ignore some vscode files
+.devcontainer
