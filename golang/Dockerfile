@@ -37,4 +37,4 @@ COPY --from=codex --chown=0:0 --chmod=u=rwx,g=rx,o=rx /tmp/codex /usr/bin/codex
 
 RUN go install golang.org/x/tools/gopls@latest
 
-RUN mkdir .config
+RUN mkdir -p .config
