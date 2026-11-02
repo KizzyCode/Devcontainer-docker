@@ -11,9 +11,8 @@ USER container
 WORKDIR /tmp
 
 RUN curl --location --tlsv1.2 --output codex-`uname -m`-unknown-linux-musl.tar.gz \
-     https://github.com/openai/codex/releases/latest/download/codex-`uname -m`-unknown-linux-musl.tar.gz
+    https://github.com/openai/codex/releases/latest/download/codex-package-`uname -m`-unknown-linux-musl.tar.gz
 RUN tar -xvf codex-`uname -m`-unknown-linux-musl.tar.gz
-RUN ln codex-`uname -m`-unknown-linux-musl codex
 
 
 FROM debian:stable-slim
@@ -33,7 +32,7 @@ WORKDIR /home/container/
 ENV PATH /home/container/go/bin:${PATH}
 ENV GOTOOLCHAIN auto
 
-COPY --from=codex --chown=0:0 --chmod=u=rwx,g=rx,o=rx /tmp/codex /usr/bin/codex
+COPY --from=codex --chown=0:0 --chmod=u=rwx,g=rx,o=rx /tmp/bin/codex* /usr/bin/
 
 RUN go install golang.org/x/tools/gopls@latest
 

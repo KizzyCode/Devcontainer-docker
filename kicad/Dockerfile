@@ -11,9 +11,8 @@ USER container
 WORKDIR /tmp
 
 RUN curl --location --tlsv1.2 --output codex-`uname -m`-unknown-linux-musl.tar.gz \
-     https://github.com/openai/codex/releases/latest/download/codex-`uname -m`-unknown-linux-musl.tar.gz
+    https://github.com/openai/codex/releases/latest/download/codex-package-`uname -m`-unknown-linux-musl.tar.gz
 RUN tar -xvf codex-`uname -m`-unknown-linux-musl.tar.gz
-RUN ln codex-`uname -m`-unknown-linux-musl codex
 
 
 FROM debian:unstable-slim
@@ -33,7 +32,7 @@ RUN useradd --shell=/usr/bin/bash --uid=10000 container
 USER container
 WORKDIR /home/container/
 
-COPY --from=codex --chown=0:0 --chmod=u=rwx,g=rx,o=rx /tmp/codex /usr/bin/codex
+COPY --from=codex --chown=0:0 --chmod=u=rwx,g=rx,o=rx /tmp/bin/codex* /usr/bin/
 ADD --checksum=sha256:f6f51bb02245e8e717f9359bd260cc9c5c0b1bc0acc8b7cb2cd5b8ffeb5de3c7 --chown=0:0 --chmod=u=rw,g=r,o=r \
     https://github.com/freerouting/freerouting/releases/download/v2.5.0/freerouting-2.5.0.jar /usr/libexec/freerouting.jar
 
