@@ -1,3 +1,5 @@
+# Derived from https://github.com/pythonscad/pythonscad/blob/v1.1.2/libraries/python/jupyterdisplay.py @eeed1b7
+
 import numpy as np
 import pythreejs as pjs
 from ipywidgets import *
@@ -51,9 +53,9 @@ def build_widget_sub(self):
     if n_vert > 0: v = vertices[0].tolist()
     select_point_geom = pjs.SphereGeometry(radius=1.0)
     scene_things = [my_object_mesh, camera, pjs.AmbientLight(color='#888888')]
-    scene = pjs.Scene(children=scene_things, background='#ffffff')
+    scene = pjs.Scene(children=scene_things, background=None)
     click_picker = pjs.Picker(controlling=my_object_mesh, event='dblclick')
-    renderer_obj = pjs.Renderer(camera=camera, background='#cccc88',
+    renderer_obj = pjs.Renderer(camera=camera, alpha=True,
         background_opacity=0, scene=scene,
         controls=[pjs.OrbitControls(controlling=camera), click_picker],
         width=640,
@@ -68,5 +70,13 @@ def build_widget(self):
     else:
         w =build_widget_sub(self)
         _widget_cache[key] = w
-    return VBox([HTML(), w, Output()])
-
+    # Override VS Code's forced white background only for PythonSCAD outputs.
+    style = HTML("""
+<style>
+.cell-output-ipywidget-background:has(.pythonscad-widget),
+.jp-OutputArea-output:has(.pythonscad-widget) {
+    background-color: transparent !important;
+}
+</style>
+""", layout=Layout(display='none'))
+    return VBox([style, w, Output()]).add_class('pythonscad-widget')
